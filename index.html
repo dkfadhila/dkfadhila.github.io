@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wrong Calculator - Consistent Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #2f2f2f; /* Dark gray background */
+      background-image: url('https://www.transparenttextures.com/patterns/squares.png'); /* Small square pattern */
+    }
+    .calculator {
+      background-color: #333333; /* Dark gray for the calculator */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      width: 250px;
+    }
+    .output {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: right;
+      padding: 10px;
+      background-color: #444444; /* Darker gray for output box */
+      border-radius: 5px;
+      color: #fff;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .button {
+      padding: 20px;
+      font-size: 18px;
+      background-color: #555555; /* Gray for the buttons */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #666666; /* Slightly lighter gray on hover */
+    }
+    .button:active {
+      background-color: #777777; /* Even lighter gray on active */
+    }
+    .button:nth-child(even) {
+      background-color: #666666; /* Slightly lighter gray for even buttons */
+    }
+    .button:nth-child(even):hover {
+      background-color: #777777;
+    }
+    .button.clear {
+      background-color: #d32f2f; /* Volcano red for the C button */
+    }
+    .button.clear:hover {
+      background-color: #b71c1c; /* Darker red on hover */
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div class="output" id="output">0</div>
+  <div class="buttons">
+    <button class="button" onclick="appendNumber('1')">1</button>
+    <button class="button" onclick="appendNumber('2')">2</button>
+    <button class="button" onclick="appendNumber('3')">3</button>
+    <button class="button" onclick="appendNumber('+')">+</button>
+    <button class="button" onclick="appendNumber('4')">4</button>
+    <button class="button" onclick="appendNumber('5')">5</button>
+    <button class="button" onclick="appendNumber('6')">6</button>
+    <button class="button" onclick="appendNumber('-')">-</button>
+    <button class="button" onclick="appendNumber('7')">7</button>
+    <button class="button" onclick="appendNumber('8')">8</button>
+    <button class="button" onclick="appendNumber('9')">9</button>
+    <button class="button" onclick="appendNumber('*')">*</button>
+    <button class="button" onclick="appendNumber('0')">0</button>
+    <button class="button clear" onclick="clearDisplay()">C</button>
+    <button class="button" onclick="calculate()">=</button>
+    <button class="button" onclick="appendNumber('/')">/</button>
+  </div>
+</div>
+
+<script>
+  let display = document.getElementById('output');
+  let currentInput = '';
+  let randomError = Math.random() * 20 - 10;
+
+  function appendNumber(number) {
+    currentInput += number;
+    display.textContent = currentInput;
+  }
+
+  function clearDisplay() {
+    currentInput = '';
+    display.textContent = '0';
+  }
+
+  function calculate() {
+    try {
+      let result = eval(currentInput);
+      result += randomError;
+      display.textContent = result.toFixed(2);
+      currentInput = '';
+    } catch (e) {
+      display.textContent = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
